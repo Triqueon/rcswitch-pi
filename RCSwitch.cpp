@@ -425,12 +425,12 @@ void RCSwitch::transmit(std::vector< std::pair< boolean, int > > signal) {
  * Waveform Protocol 2: | |__
  */
 void RCSwitch::send0() {
+    std::vector< std::pair< boolean, int > > signal;
     switch (this->nProtocol) {
         case 2:
             this->transmit(1,2);
         break;
         case 3:
-            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 275));
             signal.push_back(std::make_pair(true, 275));
@@ -450,12 +450,12 @@ void RCSwitch::send0() {
  * Waveform Protocol 2: |  |_
  */
 void RCSwitch::send1() {
+    std::vector< std::pair< boolean, int > > signal;
     switch (this->nProtocol) {
         case 2:
             this->transmit(2,1);
         break;
         case 3:
-            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 1225));
             signal.push_back(std::make_pair(true, 275));
@@ -507,12 +507,12 @@ void RCSwitch::sendTF() {
  * Waveform Protocol 2: | |__________
  */
 void RCSwitch::sendSync() {
+    std::vector< std::pair< boolean, int > > signal;
     switch (this->nProtocol) {
         case 2:
             this->transmit(1,10);
         break;
         case 3:
-            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 2675));
             this->transmit(signal);
