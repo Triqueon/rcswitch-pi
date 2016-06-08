@@ -104,7 +104,7 @@ class RCSwitch {
     void send1();
     void sendSync();
     void transmit(int nHighPulses, int nLowPulses);
-    void transmit(std::vector<std::pair<boolean, int>> signal);
+    void transmit(std::vector< std::pair< boolean, int > > signal);
 
     static char* dec2binWzerofill(unsigned long dec, unsigned int length);
 

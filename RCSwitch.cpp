@@ -400,7 +400,7 @@ void RCSwitch::transmit(int nHighPulses, int nLowPulses) {
 }
 
 
-void RCSwitch::transmit(std::vector<std::pair<boolean, int>> signal) {
+void RCSwitch::transmit(std::vector< std::pair< boolean, int > > signal) {
     boolean disabled_Receive = false;
     int nReceiverInterrupt_backup = this->nReceiverInterrupt;
     if (this->nTransmitterPin != -1) {
@@ -408,7 +408,7 @@ void RCSwitch::transmit(std::vector<std::pair<boolean, int>> signal) {
             this->disableReceive();
             disabled_Receive = true;
         }
-        for (std::vector<std::pair<boolean, int>>::iterator it = signal.begin(); it != signal.end(); ++it){
+        for (std::vector< std::pair< boolean, int > >::iterator it = signal.begin(); it != signal.end(); ++it){
             digitalWrite(this->nTransmitterPin, it->first ? HIGH : LOW);
             delayMicroseconds(it->second);
         }
@@ -430,7 +430,7 @@ void RCSwitch::send0() {
             this->transmit(1,2);
         break;
         case 3:
-            std::vector<std::pair<boolean, int>> signal;
+            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 275));
             signal.push_back(std::make_pair(true, 275));
@@ -455,7 +455,7 @@ void RCSwitch::send1() {
             this->transmit(2,1);
         break;
         case 3:
-            std::vector<std::pair<boolean, int>> signal;
+            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 1225));
             signal.push_back(std::make_pair(true, 275));
@@ -512,7 +512,7 @@ void RCSwitch::sendSync() {
             this->transmit(1,10);
         break;
         case 3:
-            std::vector<std::pair<boolean, int>> signal;
+            std::vector< std::pair< boolean, int > > signal;
             signal.push_back(std::make_pair(true, 275));
             signal.push_back(std::make_pair(false, 2675));
             this->transmit(signal);
