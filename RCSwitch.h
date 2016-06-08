@@ -1,11 +1,12 @@
 /*
   RCSwitch - Arduino libary for remote control outlet switches
-  Copyright (c) 2011 Suat Özgür.  All right reserved.
+  Copyright (c) 2011 Suat Ã–zgÃ¼r.  All right reserved.
 
   Contributors:
   - Andre Koehler / info(at)tomate-online(dot)de
   - Gordeev Andrey Vladimirovich / gordeev(at)openpyro(dot)com
-  
+  - Pascal Stein / pascal(dot)stein(at)gmail(dot)com
+
   Project home: http://code.google.com/p/rc-switch/
 
   This library is free software; you can redistribute it and/or
@@ -24,6 +25,8 @@
 */
 #ifndef _RCSwitch_h
 #define _RCSwitch_h
+#include <vector>
+#include <algorithm>
 
 #if defined(ARDUINO) && ARDUINO >= 100
     #include "Arduino.h"
@@ -55,30 +58,32 @@ class RCSwitch {
 
   public:
     RCSwitch();
-    
+
     void switchOn(int nGroupNumber, int nSwitchNumber);
     void switchOff(int nGroupNumber, int nSwitchNumber);
     void switchOn(char* sGroup, int nSwitchNumber);
     void switchOff(char* sGroup, int nSwitchNumber);
     void switchOn(char sFamily, int nGroup, int nDevice);
     void switchOff(char sFamily, int nGroup, int nDevice);
+    void switchOn(int nDeviceGroup, int nDevice, boolean bAll);
+    void switchOff(int nDeviceGroup, int nDevice, boolean bAll);
 
     void sendTriState(char* Code);
     void send(unsigned long Code, unsigned int length);
     void send(char* Code);
-    
+
     void enableReceive(int interrupt);
     void enableReceive();
     void disableReceive();
     bool available();
 	void resetAvailable();
-	
+
     unsigned long getReceivedValue();
     unsigned int getReceivedBitlength();
     unsigned int getReceivedDelay();
 	unsigned int getReceivedProtocol();
     unsigned int* getReceivedRawdata();
-  
+
     void enableTransmit(int nTransmitterPin);
     void disableTransmit();
     void setPulseLength(int nPulseLength);
@@ -86,11 +91,12 @@ class RCSwitch {
     void setReceiveTolerance(int nPercent);
 	void setProtocol(int nProtocol);
 	void setProtocol(int nProtocol, int nPulseLength);
-  
+
   private:
     char* getCodeWordB(int nGroupNumber, int nSwitchNumber, boolean bStatus);
     char* getCodeWordA(char* sGroup, int nSwitchNumber, boolean bStatus);
     char* getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bStatus);
+    char* getCodeWordAdvanced(long nDeviceGroup, boolean bAll, boolean bOn, int nDevice);
     void sendT0();
     void sendT1();
     void sendTF();
@@ -98,9 +104,10 @@ class RCSwitch {
     void send1();
     void sendSync();
     void transmit(int nHighPulses, int nLowPulses);
+    void transmit(std::vector<std::pair<boolean, int>> signal);
 
     static char* dec2binWzerofill(unsigned long dec, unsigned int length);
-    
+
     static void handleInterrupt();
 	static bool receiveProtocol1(unsigned int changeCount);
 	static bool receiveProtocol2(unsigned int changeCount);
@@ -117,7 +124,7 @@ class RCSwitch {
 	static unsigned int nReceivedProtocol;
     static unsigned int timings[RCSWITCH_MAX_CHANGES];
 
-    
+
 };
 
 #endif
