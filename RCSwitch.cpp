@@ -330,7 +330,7 @@ char* RCSwitch::getCodeWordAdvanced(long nDeviceGroup, boolean bAll, boolean bOn
     for (int i = 28; i < 32; i++){
         sReturn[i] = sDevice[i-28];
     }
-    sReturn[32] = '\0'
+    sReturn[32] = '\0';
     return sReturn;
 }
 
@@ -437,7 +437,7 @@ void RCSwitch::send0() {
             signal.push_back(std::make_pair(false, 1225));
             this->transmit(signal);
         break;
-        case default:
+        default:
             this->transmit(1,3);
     }
 }
@@ -462,7 +462,7 @@ void RCSwitch::send1() {
             signal.push_back(std::make_pair(false, 275));
             this->transmit(signal);
         break;
-        case default:
+        default:
             this->transmit(3,1);
         break;
     }
@@ -517,7 +517,7 @@ void RCSwitch::sendSync() {
             signal.push_back(std::make_pair(false, 2675));
             this->transmit(signal);
         break;
-        case default:
+        default:
             this->transmit(1,31);
     }
 }
