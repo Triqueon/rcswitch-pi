@@ -20,7 +20,10 @@ int main(int argc, char *argv[]) {
 
     int protocol = atoi(argv[1]);
     mySwitch.setProtocol(protocol);
-    if (wiringPiSetup () == -1) return 1;
+    if (wiringPiSetup () == -1) {
+        printf("Wiringpi not setup correctly, aborting");
+        return 1;
+    }
     if (argc < 4) {
         printf("insufficient number of arguments, please give at least 4 arguments");
         return 2;
