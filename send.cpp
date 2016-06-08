@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
 
     switch (protocol) {
         case 1:
-        case 2:
+        case 2: {
             char* systemCode = argv[2];
             int unitCode = atoi(argv[3]);
             int command  = atoi(argv[4]);
@@ -45,8 +45,9 @@ int main(int argc, char *argv[]) {
                     printf("command[%i] is unsupported\n", command);
                     return -1;
             }
+        }
         break;
-        case 3:
+        case 3: {
             int nDeviceGroup = atoi(argv[2]);
             int nDevice = atoi(argv[3]);
             int nCommand = atoi(argv[4]);
@@ -67,6 +68,8 @@ int main(int argc, char *argv[]) {
                     printf("command[%i] is unsupported\n", nCommand);
                     return -1;
             }
+        }
+        break;
     }
 
 
