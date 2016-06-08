@@ -1,3 +1,7 @@
+# About this fork
+
+This fork is set up to modify rcswitch-pi to be able to use some other protocols, especially the one used in the Intertechno IT-1500. To this end, I modified both the send.cpp and the RCSwitch.cpp to enable more protocols.
+
 # About
 
 rcswitch-pi is for controlling rc remote controlled power sockets 
